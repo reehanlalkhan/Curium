@@ -2,6 +2,7 @@ package com.model.user.service;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,7 +18,10 @@ import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.parents.dto.Parents;
+import com.model.std.dao.StandardDetailsDAO;
+import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.util.DataUtil;
@@ -76,41 +80,32 @@ public class UserService {
 	public void dashBoard() {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
+		    
+	                  List<Classsec> classList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	                        List<String> xaxisList = new LinkedList<String>() ;
+	                        List<String> yaxisList = new LinkedList<String>() ;
+	                        for (Classsec classSingle : classList) {
+	                            if(!"".equalsIgnoreCase(classSingle.getClassdetails())) {
+	                            List<Student> student = new studentDetailsDAO().getListStudents("From Student s where s.classstudying LIKE '" + classSingle.getClassdetails()
+                                            + " %'");
+	                            xaxisList.add("\"" + classSingle.getClassdetails() + "\"");
+	                            if(student!=null) {
+	                                String studentCount = Integer.toString(student.size());
+	                                yaxisList.add("\"" + studentCount + "\"");
+	                            }else {
+	                                yaxisList.add("\"" + 0 + "\"");
+	                            }
+	                            }
+	                        }
+	                        request.setAttribute("studentxaxis", xaxisList);
+	                        request.setAttribute("studentyaxis", yaxisList);
 			
-			int totalStudents = new UserDAO().getNoOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("totalStudents", totalStudents);
+		int totalStudents = new UserDAO().getNoOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("totalStudents", totalStudents);
 			
-			int studentNursery = new UserDAO().getNoOfStudentsOne("nursery", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int studentLKG = new UserDAO().getNoOfStudentsOne("L.K.G", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			int studentUKG = new UserDAO().getNoOfStudentsOne("U.K.G", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentOne = new UserDAO().getNoOfStudentsOne("I", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentTwo = new UserDAO().getNoOfStudentsOne("II", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentThree = new UserDAO().getNoOfStudentsOne("III", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentFour = new UserDAO().getNoOfStudentsOne("IV", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentFive = new UserDAO().getNoOfStudentsOne("V", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentSix = new UserDAO().getNoOfStudentsOne("VI", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentSeven = new UserDAO().getNoOfStudentsOne("VII", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentEight = new UserDAO().getNoOfStudentsOne("VIII", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentNine = new UserDAO().getNoOfStudentsOne("IX", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        int studentTen = new UserDAO().getNoOfStudentsOne("X", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        
-	        request.setAttribute("studentNursery", studentNursery);
-	        request.setAttribute("studentLKG", studentLKG);
-	        request.setAttribute("studentUKG", studentUKG);
-	        request.setAttribute("studentOne", studentOne);
-	        request.setAttribute("studentTwo", studentTwo);
-	        request.setAttribute("studentThree", studentThree);
-	        request.setAttribute("studentFour", studentFour);
-	        request.setAttribute("studentFive", studentFive);
-	        request.setAttribute("studentSix", studentSix);
-	        request.setAttribute("studentSeven", studentSeven);
-	        request.setAttribute("studentEight", studentEight);
-	        request.setAttribute("studentNine", studentNine);
-	        request.setAttribute("studentTen", studentTen);
-	        
-	        
 	        int totalNoOfEmployees = new EmployeeDAO().getNoOfEmployees(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        request.setAttribute("totalNoOfEmployees", totalNoOfEmployees);
+		
 		}
 		
 	}
