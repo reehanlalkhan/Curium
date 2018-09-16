@@ -24,7 +24,7 @@ public class SmsDAO {
 	Transaction transaction1;
 
 	public SmsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	public long countNumbers(String queryMain) {
@@ -38,8 +38,8 @@ public class SmsDAO {
 					+ "AND contactnumber IS NOT NULL and contactnumber <> '' ");
 			totalNumbers = (long) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		}
 		// session.close();
@@ -65,8 +65,8 @@ public class SmsDAO {
 
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 
 		} finally {

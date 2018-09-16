@@ -1,32 +1,21 @@
 package com.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.MalformedInputException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.net.ftp.FTPClient;
-
-import com.model.sendsms.dao.SmsDAO;
 
 public class test {
 
 	
 	public static void main(String[] args) throws SocketException, IOException{
+	    
+	    String currentAcademicYear = "2016/17".toString().substring(1, 3);
+	    System.out.println("current Academic year "+currentAcademicYear);
 		
 	/*	Map<Date,Integer> myMap = new HashMap<Date, Integer>();
 		myMap.put(new Date(), 1);

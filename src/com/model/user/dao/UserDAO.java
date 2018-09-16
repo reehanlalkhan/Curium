@@ -28,7 +28,7 @@ public class UserDAO {
 	    public UserDAO() {
 	    	//Musaib
 	        //sessionFactory = HibernateUtil.getSessionFactory();
-	        session=HibernateUtil.openSession();
+	        session=HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -48,7 +48,7 @@ public class UserDAO {
            login = (Login) query.uniqueResult();
            transaction.commit();
            
-       }catch(Exception hibernateException){
+       }catch (Exception hibernateException) {transaction.rollback();
            System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
        }finally{
@@ -71,8 +71,8 @@ public class UserDAO {
 	            noOfRecords = results.size();
 	            transaction.commit();
 
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch(HibernateException hibernateException){transaction.rollback();
+	
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -96,8 +96,8 @@ public class UserDAO {
 
 
 
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch(HibernateException hibernateException){transaction.rollback();
+	
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -117,7 +117,7 @@ public class UserDAO {
            query.setParameter("password", currentPassword);
            login = (Login) query.uniqueResult();
            transaction.commit();
-       }catch(HibernateException hibernateException){
+       }catch(HibernateException hibernateException){transaction.rollback();
            hibernateException.printStackTrace();
        }finally{
            return login;
@@ -129,8 +129,8 @@ public class UserDAO {
             transaction = session.beginTransaction();
             session.update(login);
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -148,8 +148,8 @@ public class UserDAO {
             Query HQLquery = session.createQuery(queryMain);
             feesDetails = (java.util.List<Feesdetails>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -166,8 +166,8 @@ public class UserDAO {
             Query HQLquery = session.createQuery(queryMain);
             feesDetails = (java.util.List<Receiptinfo>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -181,8 +181,8 @@ public class UserDAO {
             session.save(user);
             transaction.commit();
            return true;
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             session.close();
@@ -199,8 +199,8 @@ public class UserDAO {
             query.setParameter("loginName", teacherexternalid);
             user = (Login) query.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             session.close();

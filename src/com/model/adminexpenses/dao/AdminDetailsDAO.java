@@ -26,7 +26,7 @@ public class AdminDetailsDAO {
 	SessionFactory sessionFactory;
 
 	public AdminDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -38,8 +38,8 @@ public class AdminDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -64,8 +64,8 @@ public class AdminDetailsDAO {
 			System.out.println("Adminexpenses " + results.size());
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -85,7 +85,7 @@ public class AdminDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 

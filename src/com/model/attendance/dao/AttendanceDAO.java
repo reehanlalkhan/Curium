@@ -33,7 +33,7 @@ public class AttendanceDAO {
 	private static final Logger logger = LogManager.getLogger(AttendanceDAO.class);
 
 	public AttendanceDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	public List<Teacher> readListOfObjects() {
@@ -47,8 +47,8 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			holidayMaster = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		}catch(Exception e){
-			transaction.rollback();
+		}catch(Exception e){transaction.rollback();
+
 		} finally {
 			session.close();
 		}
@@ -63,8 +63,8 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -79,8 +79,8 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -96,9 +96,9 @@ public class AttendanceDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		}catch(HibernateException e){
-			transaction.rollback();
-			e.printStackTrace();
+		}catch(HibernateException hibernateException){transaction.rollback();
+
+		hibernateException.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -113,7 +113,7 @@ public class AttendanceDAO {
 				transaction = session.beginTransaction();
 				weeklyOff = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"' and branchid="+branchId).list();
 				transaction.commit();
-			}catch(Exception e){
+			}catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 			} finally {
 				session.close();
@@ -131,7 +131,7 @@ public class AttendanceDAO {
 			query.setParameterList("ids", weeklyOffList);
 			weeklyOff = query.list();
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
@@ -150,7 +150,7 @@ public class AttendanceDAO {
 			query.setParameterList("ids", weeklyOffList);
 			weeklyOff = query.list();
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
@@ -169,8 +169,8 @@ public class AttendanceDAO {
 			query.setParameterList("ids", holidaysIntList);
 			holidayMaster = query.list();
 			transaction.commit();
-		}catch(Exception e){
-			transaction.rollback();
+		}catch(Exception e){transaction.rollback();
+
 		} finally {
 			session.close();
 		}
@@ -187,8 +187,8 @@ public class AttendanceDAO {
 			query.setParameterList("ids", holidaysIntList);
 			holidayMaster = query.list();
 			transaction.commit();
-		}catch(Exception e){
-			transaction.rollback();
+		}catch(Exception e){transaction.rollback();
+
 		} finally {
 			session.close();
 		}
@@ -203,7 +203,7 @@ public class AttendanceDAO {
 			session.save(attendanceMaster);
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 		}finally {
 			session.close();
@@ -219,7 +219,7 @@ public class AttendanceDAO {
 			}
 			transaction.commit();
 			return true;
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 		}finally {
 			session.close();
@@ -233,7 +233,7 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			studentAttendanceMaster = session.createQuery("From Attendancemaster where attendeeid = "+attendeeId+" and branchid="+branchId).list();
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			session.close();
@@ -247,7 +247,7 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			studentAttendanceMaster = session.createQuery("From Attendancemaster where attendeeid = "+attendeeId+"").list();
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			session.close();
@@ -269,7 +269,7 @@ public class AttendanceDAO {
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentdailyattendance);
 				}else{
-					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = " +
+					Query queryTwo = session.createQuery("update Studentdailyattendance set attendancestatus = " +
 							"'"+studentdailyattendance.getAttendancestatus()+"' where attendanceid = " +
 									"'"+studentDailyAttendanceDetails.getAttendanceid()+"'");
 					queryTwo.executeUpdate();
@@ -278,9 +278,8 @@ public class AttendanceDAO {
 			
 			transaction.commit();
 			return true;
-		}catch(HibernateException e){
-			logger.info(e);
-			System.out.println(""+e);
+		}catch(HibernateException hibernateException){transaction.rollback();
+			logger.info(hibernateException);
 		}finally{
 			session.close();
 		}
@@ -295,9 +294,8 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
-		}catch(HibernateException e){
-			logger.info(e);
-			System.out.println("column "+e);
+		}catch(HibernateException hibernateException){transaction.rollback();
+			logger.info(hibernateException);
 		}finally{
 			session.close();
 		}
@@ -312,7 +310,7 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 			// TODO: handle exception
 		}finally{
 			session.close();
@@ -333,7 +331,7 @@ public class AttendanceDAO {
 			}
 			transaction.commit();
 			return true;
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			System.out.println("error "+e);
 		}finally{
 			session.close();
@@ -349,7 +347,7 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalIdGraph+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 			// TODO: handle exception
 		}finally{
 			session.close();
@@ -377,7 +375,7 @@ public class AttendanceDAO {
 			
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
 			session.close();
@@ -402,7 +400,7 @@ public class AttendanceDAO {
 				}
 			}
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
 			session.close();
@@ -424,7 +422,7 @@ public class AttendanceDAO {
 				mapStudentAttendance.put(student.getName(), studentAttendance);
 			}
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}
 		return mapStudentAttendance;
@@ -451,9 +449,8 @@ public class AttendanceDAO {
 			
 			transaction.commit();
 			return true;
-		}catch(HibernateException e){
-			logger.info(e);
-			System.out.println(""+e);
+		}catch(HibernateException hibernateException){transaction.rollback();
+			logger.info(hibernateException);
 		}finally{
 			session.close();
 		}
@@ -469,9 +466,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction = session.beginTransaction();
 			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"' and branchid="+branchId).list();
 			transaction.commit();
-		}catch(HibernateException e){
-			logger.info(e);
-			System.out.println("column "+e);
+		}catch(HibernateException hibernateException){transaction.rollback();
+			logger.info(hibernateException);
 		}finally{
 			session.close();
 		}
@@ -490,7 +486,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			}
 			transaction.commit();
 			return true;
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			System.out.println("error "+e);
 		}finally{
 			session.close();
@@ -506,7 +502,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction = session.beginTransaction();
 			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 			// TODO: handle exception
 		}finally{
 			session.close();
@@ -535,7 +531,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
 			session.close();
@@ -560,7 +556,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 				mapStaffAttendance.put(teacher.getTeachername(), staffAttendance);
 			}
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}
 		return mapStaffAttendance;
@@ -582,7 +578,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 				}
 			}
 			transaction.commit();
-		}catch(Exception e){
+		}catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
 			session.close();

@@ -28,7 +28,7 @@ public class SubjectDetailsDAO {
 	
 	
 	public SubjectDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	@SuppressWarnings({ "unchecked", "finally" })
@@ -41,8 +41,8 @@ public class SubjectDetailsDAO {
 			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
 					.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			 session.close();
@@ -58,8 +58,8 @@ public class SubjectDetailsDAO {
 
 			transaction.commit();
 			
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -76,7 +76,7 @@ public class SubjectDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		

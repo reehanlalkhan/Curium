@@ -27,7 +27,7 @@ public class positionDAO {
 	SessionFactory sessionFactory;
 
 	public positionDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -40,8 +40,8 @@ public class positionDAO {
 
             transaction.commit();
             
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             session.close();
@@ -58,8 +58,8 @@ public class positionDAO {
             transaction = session.beginTransaction();
             results = (List<Position>) session.createQuery("From Position where branchid = "+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -74,7 +74,7 @@ public class positionDAO {
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch(HibernateException hibernateException){transaction.rollback();
             hibernateException.printStackTrace();
         }
 		

@@ -25,7 +25,7 @@ public class EmailDAO {
 	
 
 	public EmailDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	
@@ -39,8 +39,8 @@ public class EmailDAO {
 			Query query = session.createQuery("select count(*)" +queryMain+ "AND email IS NOT NULL AND email <> '' ");
 			totalNumbers = (long) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		}
 		// session.close();
@@ -68,8 +68,8 @@ public class EmailDAO {
 			transaction.commit();
 			
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 
 		} finally {

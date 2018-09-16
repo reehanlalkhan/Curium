@@ -20,7 +20,7 @@ public class ExamDetailsDAO {
 	Transaction transaction;
 	
 	public ExamDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	
@@ -33,8 +33,8 @@ public class ExamDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -56,8 +56,8 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -76,7 +76,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 
@@ -93,7 +93,7 @@ public class ExamDetailsDAO {
 				}
 				transaction.commit();
 				return true;
-			} catch (Exception e) {
+			} catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 			}finally{
 				session.close();
@@ -115,8 +115,8 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -135,7 +135,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			session.close();
@@ -150,7 +150,7 @@ public class ExamDetailsDAO {
 			transaction = session.beginTransaction();
 			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			session.close();

@@ -1,7 +1,11 @@
 package com.model.user.service;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -105,12 +109,82 @@ public class UserService {
 			
 	        int totalNoOfEmployees = new EmployeeDAO().getNoOfEmployees(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        request.setAttribute("totalNoOfEmployees", totalNoOfEmployees);
-		
+	        
+	        
+	        //Get Fees Collection Details
+	            String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().substring(0, 4);
+	            String fromDate = currentAcademicYear+"-04-01";
+	            String toDate = Integer.toString((Integer.parseInt(currentAcademicYear)+1))+"-03-31";
+	            List<String> xaxisMonth = new LinkedList<String>() ;
+                    List<String> yaxisFees = new LinkedList<String>() ;
+	            
+	                 try {
+	                       SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");  
+	                       Date dateBefore = myFormat.parse(fromDate);
+	                       Date dateAfter = myFormat.parse(toDate);
+	                       
+	                       Calendar start = Calendar.getInstance();
+	                                start.setTime(dateBefore);
+	                                Calendar end = Calendar.getInstance();
+	                                end.setTime(dateAfter);
+	                                end.add(Calendar.DATE, 1);
+	                       
+	                       for (Date date = start.getTime(); start.before(end); start.add(Calendar.MONTH, +1), date = start.getTime()) {
+	                                    // Do your job here with `date`.
+	                                    System.out.println("*******************************"+new SimpleDateFormat("YYYY-MM-dd").format(date) );
+	                                    Calendar cal = Calendar.getInstance();
+	                                    cal.setTime(date);
+	                                    cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+	                                    final Date dateTo = cal.getTime();
+	                                    long feesCollection = searchByDate(new SimpleDateFormat("dd-MM-YYYY").format(date),new SimpleDateFormat("dd-MM-YYYY").format(dateTo));
+	                                    Formatter fmt = new Formatter();
+	                                    fmt.format("%tB", cal);
+	                                    xaxisMonth.add(fmt.toString());
+	                                    yaxisFees.add(Long.toString(feesCollection));
+	                                }
+	                       
+	                 } catch (Exception e) {
+	                       e.printStackTrace();
+	                 }
 		}
 		
 	}
 
-	public void advanceSearch() {
+	private long searchByDate(String date, String dateTo) {
+            
+           List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+           
+           if(httpSession.getAttribute(BRANCHID)!=null){
+                   
+           String queryMain ="From Receiptinfo as feesdetails where feesdetails.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+           String fromDate = date.toString();
+           String toDate= dateTo.toString();
+           
+           
+                   String querySub = "";
+                   
+                   if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+                           querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
+                           
+                   }
+                   
+                   queryMain = queryMain+querySub;
+                   /*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+                   System.out.println("SEARCH QUERY ***** "+queryMain);
+                   feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+                   
+   }
+                   long sumOfFees = 0l;
+                   for (Receiptinfo receiptinfo : feesDetailsList) {
+                           sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+                   }
+                   
+                return sumOfFees;
+           
+           
+   }
+
+    public void advanceSearch() {
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		

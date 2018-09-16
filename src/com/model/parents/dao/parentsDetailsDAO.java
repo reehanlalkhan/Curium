@@ -22,7 +22,7 @@ public class parentsDetailsDAO {
 	    SessionFactory sessionFactory;
 	    
 	    public parentsDetailsDAO() {
-	    	   session = HibernateUtil.openSession();
+	    	   session = HibernateUtil.openCurrentSession();
 		}
 
 	@SuppressWarnings("finally")
@@ -35,8 +35,8 @@ public class parentsDetailsDAO {
 
 	            transaction.commit();
 	           
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch(HibernateException hibernateException){transaction.rollback();
+	
 	            hibernateException.printStackTrace();
 	        } finally {
 	            session.close();
@@ -53,8 +53,8 @@ public class parentsDetailsDAO {
             Query query = session.createQuery("from Parents as parents where parents.Student.sid=" + id);
             parents = (Parents) query.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -70,8 +70,8 @@ public class parentsDetailsDAO {
             session.update(parents);
             transaction.commit();
             System.out.println("in update parents");
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             //session.close();

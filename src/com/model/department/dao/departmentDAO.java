@@ -29,7 +29,7 @@ public class departmentDAO {
     
 
 	public departmentDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 
@@ -43,8 +43,8 @@ public class departmentDAO {
 
             transaction.commit();
             
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             session.close();
@@ -62,8 +62,8 @@ public class departmentDAO {
             transaction = session.beginTransaction();
             results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -79,7 +79,7 @@ public class departmentDAO {
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch(HibernateException hibernateException){transaction.rollback();
             hibernateException.printStackTrace();
         }
 		

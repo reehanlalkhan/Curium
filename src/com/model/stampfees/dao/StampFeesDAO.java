@@ -24,7 +24,7 @@ public class StampFeesDAO {
 	    
 	    public StampFeesDAO() {
 	        sessionFactory = HibernateUtil.getSessionFactory();
-	        session=HibernateUtil.openSession();
+	        session=HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -50,7 +50,7 @@ public class StampFeesDAO {
            login = (Login) query.uniqueResult();
            transaction.commit();
            
-       }catch(HibernateException hibernateException){
+       }catch(HibernateException hibernateException){transaction.rollback();
            System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
        }finally{
@@ -77,8 +77,8 @@ public class StampFeesDAO {
 
 
 
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch(HibernateException hibernateException){transaction.rollback();
+	
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -103,8 +103,8 @@ public class StampFeesDAO {
 
 
 
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch(HibernateException hibernateException){transaction.rollback();
+	
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -122,8 +122,8 @@ public class StampFeesDAO {
             Query HQLquery = session.createQuery(query);
             parents = (java.util.List<Parents>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
+
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -157,8 +157,8 @@ public class StampFeesDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -181,7 +181,7 @@ public class StampFeesDAO {
 			query.executeUpdate();
 			query2.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 

@@ -26,7 +26,7 @@ public class StandardDetailsDAO {
     SessionFactory sessionFactory;
 	
 	public StandardDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -35,8 +35,8 @@ public class StandardDetailsDAO {
 	            transaction = session.beginTransaction();
 	            session.save(classsec);
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch(HibernateException hibernateException){transaction.rollback();
+	
 	            hibernateException.printStackTrace();
 	        } finally {
 	            session.close();
@@ -51,11 +51,10 @@ public class StandardDetailsDAO {
             transaction = session.beginTransaction();
             classsecList = session.createQuery("From Classsec where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch(HibernateException hibernateException){transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+           // session.close();
             return classsecList;
         }
     }
@@ -68,7 +67,7 @@ public class StandardDetailsDAO {
                 query.setParameterList("ids", ids);
                 query.executeUpdate();
                 transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch(HibernateException hibernateException){transaction.rollback();
                 hibernateException.printStackTrace();
         }
 

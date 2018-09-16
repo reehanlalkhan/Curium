@@ -27,7 +27,7 @@ public class YearDAO {
 	
 
 	public YearDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -39,8 +39,7 @@ public class YearDAO {
 			session.save(currentacademicyear);
 			transaction.commit();
 			
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
 			error=hibernateException.getMessage();
 		} finally {
 			session.close();
@@ -61,8 +60,8 @@ public class YearDAO {
 					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ");
 			currentacademicyear = (Currentacademicyear) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		}
 		// session.close();

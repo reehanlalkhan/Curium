@@ -19,7 +19,7 @@ public class MarksDetailsDAO {
 	Transaction transaction;
 	
 	public MarksDetailsDAO() {
-		session=HibernateUtil.openSession();
+		session=HibernateUtil.openCurrentSession();
 	}
 
 	public String addMarks(List<Marks> marksList) {
@@ -38,8 +38,8 @@ public class MarksDetailsDAO {
 			
 			transaction.commit();
 			
-		}  catch (HibernateException hibernateException) {
-			transaction.rollback();
+		}  catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} 
 		finally {
@@ -63,8 +63,8 @@ public class MarksDetailsDAO {
 			//query.executeUpdate();
 			results = query.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch(HibernateException hibernateException){transaction.rollback();
+
 			hibernateException.printStackTrace();
 		} finally {
 			 session.close();
@@ -85,8 +85,8 @@ public class MarksDetailsDAO {
 				//query.executeUpdate();
 				results = query.list();
 				transaction.commit();
-			} catch (HibernateException hibernateException) {
-				transaction.rollback();
+			} catch(HibernateException hibernateException){transaction.rollback();
+	
 				hibernateException.printStackTrace();
 			} finally {
 				 session.close();
@@ -108,10 +108,10 @@ public class MarksDetailsDAO {
 	        
 				transaction.commit();
 				
-			}  catch (HibernateException hibernateException) {
-				transaction.rollback();
+			}  catch(HibernateException hibernateException){transaction.rollback();
+	
 				hibernateException.printStackTrace();
-			} catch(Exception e){
+			} catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 			}
 			finally {
@@ -130,7 +130,7 @@ public class MarksDetailsDAO {
 				query.executeUpdate();
 				transaction.commit();
 				result=true;
-			} catch (HibernateException hibernateException) {
+			} catch(HibernateException hibernateException){transaction.rollback();
 				hibernateException.printStackTrace();
 				result=false;
 			}
@@ -145,8 +145,8 @@ public class MarksDetailsDAO {
 				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid ASC");
 				results = query.list();
 				transaction.commit();
-			} catch (HibernateException hibernateException) {
-				transaction.rollback();
+			} catch(HibernateException hibernateException){transaction.rollback();
+	
 				hibernateException.printStackTrace();
 			} finally {
 				 session.close();
