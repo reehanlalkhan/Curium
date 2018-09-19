@@ -610,16 +610,19 @@ public class AccountService {
 		List<Receipttransactions> receiptTransactions = new ArrayList<Receipttransactions>();
 		String twoAccounts = null;
 		Map<Receipttransactions,String> receiptMap = new HashMap<Receipttransactions, String>();
-		receiptTransactions = new AccountDAO().getReceiptTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Financialaccountingyear financialAccountingYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(financialAccountingYear!=null) {
+		
+		receiptTransactions = new AccountDAO().getReceiptTransactions(financialAccountingYear.getFinancialid(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		for (Receipttransactions receipttransactionsSingle : receiptTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(receipttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(receipttransactionsSingle.getCraccountid());
 			receiptMap.put(receipttransactionsSingle, twoAccounts);
 		}
+		}
+		
 		request.setAttribute("receipttransactions", receiptMap);
-		
-		
-		
 		return true;
 	}
 
@@ -629,11 +632,15 @@ public class AccountService {
 		List<Paymenttransactions> paymentTransactions = new ArrayList<Paymenttransactions>();
 		String twoAccounts = null;
 		Map<Paymenttransactions,String> paymentMap = new HashMap<Paymenttransactions, String>();
-		paymentTransactions = new AccountDAO().getPaymentTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Financialaccountingyear financialAccountingYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(financialAccountingYear!=null) {
+		paymentTransactions = new AccountDAO().getPaymentTransactions(financialAccountingYear.getFinancialid(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		for (Paymenttransactions paymenttransactionsSingle : paymentTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
 			paymentMap.put(paymenttransactionsSingle, twoAccounts);
+		}
 		}
 		request.setAttribute("paymenttransactions", paymentMap);
 		return true;
@@ -645,11 +652,15 @@ public class AccountService {
 		List<Contratransactions> contraTransactions = new ArrayList<Contratransactions>();
 		String twoAccounts = null;
 		Map<Contratransactions,String> paymentMap = new HashMap<Contratransactions, String>();
-		contraTransactions = new AccountDAO().getContraTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Financialaccountingyear financialAccountingYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(financialAccountingYear!=null) {
+		contraTransactions = new AccountDAO().getContraTransactions(financialAccountingYear.getFinancialid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		for (Contratransactions paymenttransactionsSingle : contraTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
 			paymentMap.put(paymenttransactionsSingle, twoAccounts);
+		}
 		}
 		request.setAttribute("contratransactions", paymentMap);
 		return true;
@@ -661,12 +672,14 @@ public class AccountService {
 		List<Journaltransactions> journalTransactions = new ArrayList<Journaltransactions>();
 		String twoAccounts = null;
 		Map<Journaltransactions,String> paymentMap = new HashMap<Journaltransactions, String>();
-		journalTransactions = new AccountDAO().getJournalTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Financialaccountingyear financialAccountingYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
-		
+		if(financialAccountingYear!=null) {
+		journalTransactions = new AccountDAO().getJournalTransactions(financialAccountingYear.getFinancialid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		for (Journaltransactions journaltransactionsSingle : journalTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(journaltransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(journaltransactionsSingle.getCraccountid());
 			paymentMap.put(journaltransactionsSingle, twoAccounts);
+		}
 		}
 		request.setAttribute("journaltransactions", paymentMap);
 		return true;

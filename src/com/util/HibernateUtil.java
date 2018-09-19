@@ -89,9 +89,7 @@ public class HibernateUtil {
             return getSessionFactory().getCurrentSession();
 
         }
-        else{
-            return getSessionFactory().openSession();
-        }
+        return getSessionFactory().openSession();
 
         //return getSessionFactory().getCurrentSession();
     }
