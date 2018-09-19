@@ -76,7 +76,7 @@ public class UserDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	            ////session.close();
 	            return noOfRecords;
 	        }
 	}
@@ -101,7 +101,7 @@ public class UserDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	            ////session.close();
 	            return noOfRecords;
 	        }
 	}
@@ -133,7 +133,7 @@ public class UserDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return login;
         }
    }
@@ -152,7 +152,7 @@ public class UserDAO {
 
             hibernateException.printStackTrace();
         }
-        //session.close();
+        ////session.close();
         return feesDetails;
 	}
 
@@ -170,7 +170,7 @@ public class UserDAO {
 
             hibernateException.printStackTrace();
         }
-        //session.close();
+        ////session.close();
         return feesDetails;
 	}
 
@@ -185,7 +185,7 @@ public class UserDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
 		return false;
 		
@@ -203,7 +203,7 @@ public class UserDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
 		return user;
 	}

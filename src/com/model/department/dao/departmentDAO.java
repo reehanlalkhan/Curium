@@ -47,7 +47,7 @@ public class departmentDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return department;
         }
 	}
@@ -66,7 +66,7 @@ public class departmentDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return results;
         }
 	}

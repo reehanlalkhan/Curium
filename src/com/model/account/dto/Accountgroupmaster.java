@@ -27,7 +27,7 @@ public class Accountgroupmaster implements java.io.Serializable {
 
 	private Integer accountgroupid;
 	private String accountgroupname;
-	private int branchid;
+	
 	
 	
 	public Accountgroupmaster() {
@@ -35,7 +35,6 @@ public class Accountgroupmaster implements java.io.Serializable {
 
 	public Accountgroupmaster(String accountgroupname, int branchid) {
 		this.accountgroupname = accountgroupname;
-		this.branchid = branchid;
 	}
 
 	@Id
@@ -58,11 +57,4 @@ public class Accountgroupmaster implements java.io.Serializable {
 		this.accountgroupname = accountgroupname;
 	}
 
-	public int getBranchid() {
-		return branchid;
-	}
-
-	public void setBranchid(int branchid) {
-		this.branchid = branchid;
-	}
 }

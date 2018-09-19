@@ -50,7 +50,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return holidayMaster;
@@ -67,7 +67,7 @@ public class AttendanceDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -83,7 +83,7 @@ public class AttendanceDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -100,7 +100,7 @@ public class AttendanceDAO {
 
 		hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -116,7 +116,7 @@ public class AttendanceDAO {
 			}catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 			} finally {
-				session.close();
+				//session.close();
 			}
 			
 		return weeklyOff;
@@ -134,7 +134,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 	return weeklyOff;
@@ -153,7 +153,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 	return weeklyOff;
@@ -172,7 +172,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return holidayMaster;
@@ -190,7 +190,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return holidayMaster;
@@ -206,7 +206,7 @@ public class AttendanceDAO {
 		} catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 		}finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -222,7 +222,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 				e.printStackTrace();
 		}finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -236,7 +236,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return studentAttendanceMaster;
 	}
@@ -250,7 +250,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return studentAttendanceMaster;
 	}
@@ -281,7 +281,7 @@ public class AttendanceDAO {
 		}catch(HibernateException hibernateException){transaction.rollback();
 			logger.info(hibernateException);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -297,7 +297,7 @@ public class AttendanceDAO {
 		}catch(HibernateException hibernateException){transaction.rollback();
 			logger.info(hibernateException);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return studentDailyAttendance;
 	}
@@ -313,7 +313,7 @@ public class AttendanceDAO {
 		} catch(Exception e){transaction.rollback();
 			// TODO: handle exception
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return studentDailyAttendance;
@@ -334,7 +334,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 			System.out.println("error "+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -350,7 +350,7 @@ public class AttendanceDAO {
 		} catch(Exception e){transaction.rollback();
 			// TODO: handle exception
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return studentDailyAttendance;
@@ -378,7 +378,7 @@ public class AttendanceDAO {
 		} catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -403,7 +403,7 @@ public class AttendanceDAO {
 		}catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 	}
 
@@ -452,7 +452,7 @@ public class AttendanceDAO {
 		}catch(HibernateException hibernateException){transaction.rollback();
 			logger.info(hibernateException);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -469,7 +469,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}catch(HibernateException hibernateException){transaction.rollback();
 			logger.info(hibernateException);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return staffDailyAttendance;
 	}
@@ -489,7 +489,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}catch(Exception e){transaction.rollback();
 			System.out.println("error "+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -505,7 +505,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		} catch(Exception e){transaction.rollback();
 			// TODO: handle exception
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return staffDailyAttendance;
@@ -534,7 +534,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		} catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -581,7 +581,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}catch(Exception e){transaction.rollback();
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 	}
 

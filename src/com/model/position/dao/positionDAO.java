@@ -44,7 +44,7 @@ public class positionDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return position;
         }
 	}
@@ -62,7 +62,7 @@ public class positionDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return results;
         }
 	}

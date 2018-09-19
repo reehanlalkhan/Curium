@@ -82,7 +82,7 @@ public class StampFeesDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	            ////session.close();
 	            return noOfRecords;
 	        }
 	}
@@ -108,7 +108,7 @@ public class StampFeesDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	            ////session.close();
 	            return noOfRecords;
 	        }
 	}
@@ -126,7 +126,7 @@ public class StampFeesDAO {
 
             hibernateException.printStackTrace();
         }
-        //session.close();
+        ////session.close();
         return parents;
 	}
 
@@ -161,7 +161,7 @@ public class StampFeesDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			/*return student;*/
 		}
 	}

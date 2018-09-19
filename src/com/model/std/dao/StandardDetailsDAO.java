@@ -39,7 +39,7 @@ public class StandardDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
+	            //session.close();
 	            return classsec;
 	        }
 	}
@@ -54,7 +54,7 @@ public class StandardDetailsDAO {
         } catch(HibernateException hibernateException){transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-           // session.close();
+           // //session.close();
             return classsecList;
         }
     }

@@ -45,7 +45,7 @@ public class SubjectDetailsDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
+			 //session.close();
 			return results;
 		}
 	}
@@ -62,7 +62,7 @@ public class SubjectDetailsDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return subject;
 		}
 		

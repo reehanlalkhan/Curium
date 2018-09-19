@@ -42,7 +42,7 @@ public class feesCategoryDAO {
         } catch(HibernateException hibernateException){transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return results;
         }
 	}
@@ -61,7 +61,7 @@ public class feesCategoryDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return feescategory;
         }
 	}
@@ -102,7 +102,7 @@ public class feesCategoryDAO {
 		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 	}
 

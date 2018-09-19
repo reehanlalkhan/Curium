@@ -43,7 +43,7 @@ public class MarksDetailsDAO {
 			hibernateException.printStackTrace();
 		} 
 		finally {
-			session.close();
+			//session.close();
 			return output;
 		}
 		
@@ -67,7 +67,7 @@ public class MarksDetailsDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
+			 //session.close();
 			return results;
 		}
 	}
@@ -89,7 +89,7 @@ public class MarksDetailsDAO {
 	
 				hibernateException.printStackTrace();
 			} finally {
-				 session.close();
+				 //session.close();
 				return results;
 			}
 	}
@@ -115,7 +115,7 @@ public class MarksDetailsDAO {
 				e.printStackTrace();
 			}
 			finally {
-				session.close();
+				//session.close();
 				return result;
 			}
 		}
@@ -149,7 +149,7 @@ public class MarksDetailsDAO {
 	
 				hibernateException.printStackTrace();
 			} finally {
-				 session.close();
+				 //session.close();
 				return results;
 			}
 		}

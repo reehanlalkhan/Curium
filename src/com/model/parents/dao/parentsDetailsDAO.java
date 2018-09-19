@@ -39,7 +39,7 @@ public class parentsDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
+	            //session.close();
 	            return parents;
 	        }
 	}
@@ -57,7 +57,7 @@ public class parentsDetailsDAO {
 
             hibernateException.printStackTrace();
         }
-        //session.close();
+        ////session.close();
         return parents;
 	}
 
@@ -74,7 +74,7 @@ public class parentsDetailsDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return parents;
         }
 	}

@@ -43,7 +43,7 @@ public class EmployeeDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return result;
 	}
@@ -62,7 +62,7 @@ public class EmployeeDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return results;
 		}
 	}
@@ -81,7 +81,7 @@ public class EmployeeDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return results;
 		}
 	}
@@ -115,7 +115,7 @@ public class EmployeeDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return employee;
         }
 	}
@@ -149,7 +149,7 @@ public class EmployeeDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
+			 //session.close();
 			return noOfRecords;
 		}
 	}
@@ -163,7 +163,7 @@ public class EmployeeDAO {
 		} catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return employee;
 	}
@@ -177,7 +177,7 @@ public class EmployeeDAO {
 		} catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return employee;
 	}
@@ -191,7 +191,7 @@ public class EmployeeDAO {
 		} catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return employeeExtId;
 	}
@@ -207,7 +207,7 @@ public class EmployeeDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
 		
 	}

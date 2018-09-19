@@ -43,7 +43,7 @@ public class studentDetailsDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return student;
 		}
 	}
@@ -71,7 +71,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -98,7 +98,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return noOfRecords;
 		}
 	}
@@ -119,7 +119,7 @@ public class studentDetailsDAO {
 
 			hibernateException.printStackTrace();
 		}
-		// session.close();
+		// //session.close();
 		return student;
 	}
 
@@ -135,7 +135,7 @@ public class studentDetailsDAO {
 
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			// //session.close();
 			return student;
 		}
 	}
@@ -158,7 +158,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -197,7 +197,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -256,7 +256,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -347,7 +347,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -373,7 +373,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -402,7 +402,7 @@ public class studentDetailsDAO {
 		} catch(HibernateException hibernateException){transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			//session.close();
+			////session.close();
 		}
 	}
 
@@ -428,7 +428,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			//session.close();
+			////session.close();
 			return results;
 		}
 	}
@@ -446,7 +446,7 @@ public class studentDetailsDAO {
 
             hibernateException.printStackTrace();
         }
-        //session.close();
+        ////session.close();
         return parents;
 	}
 
@@ -463,7 +463,7 @@ public class studentDetailsDAO {
 
             hibernateException.printStackTrace();
         }
-        //session.close();
+        ////session.close();
         return parents;
 	}
 	
@@ -478,7 +478,7 @@ public class studentDetailsDAO {
 
             hibernateException.printStackTrace();
         }finally{
-        	session.close();
+        	//session.close();
         }
         return student;
 	}
@@ -496,7 +496,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			//session.close();
+			////session.close();
 			return studentFeesStructure;
 		}
 	}
@@ -513,7 +513,7 @@ public class studentDetailsDAO {
 		} catch(Exception e){transaction.rollback();
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -539,7 +539,7 @@ public class studentDetailsDAO {
 	                hibernateException.printStackTrace();
 
 	        } finally {
-	                // session.close();
+	                // //session.close();
 	                return results;
 	        }
 	}

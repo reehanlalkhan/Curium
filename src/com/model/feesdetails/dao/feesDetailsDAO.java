@@ -46,7 +46,7 @@ public class feesDetailsDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            ////session.close();
             return results;
         }
 	}
@@ -65,7 +65,7 @@ public class feesDetailsDAO {
 
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return feesdetails;
         }
 	}
@@ -83,7 +83,7 @@ public class feesDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        }
-	        //session.close();
+	        ////session.close();
 	        return feesdetails;
 	}
 	
@@ -100,7 +100,7 @@ public class feesDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        }
-	        //session.close();
+	        ////session.close();
 	        return feesdetails;
 	}
 	
@@ -120,7 +120,7 @@ public class feesDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        }
-	        //session.close();
+	        ////session.close();
 	        return results;
 	}
 
@@ -144,7 +144,7 @@ public class feesDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        }
-	        //session.close();
+	        ////session.close();
 	        return results;
 	}
 
@@ -170,7 +170,7 @@ public class feesDetailsDAO {
             hibernateException.printStackTrace();
         }
         
-        //session.close();
+        ////session.close();
         return dueFees;
 	}
 
@@ -191,7 +191,7 @@ public class feesDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        }
-	        //session.close();
+	        ////session.close();
 	        return results;
 	}
 
@@ -213,7 +213,7 @@ public class feesDetailsDAO {
 	
 	            hibernateException.printStackTrace();
 	        }
-	        //session.close();
+	        ////session.close();
 	        return results;
 	}
 
@@ -234,7 +234,7 @@ public class feesDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
