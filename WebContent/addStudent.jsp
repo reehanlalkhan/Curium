@@ -302,9 +302,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -313,9 +313,9 @@
 		$("#datepicker1").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
@@ -325,9 +325,9 @@
 		$("#dateoftc").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateoftc" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftc").datepicker("option", "showAnim",
@@ -339,9 +339,9 @@
 		$("#dateofadmission").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateofadmission" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofadmission").datepicker("option", "showAnim",
@@ -353,9 +353,9 @@
 		$("#dateofleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateofleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofleaving").datepicker("option", "showAnim",
@@ -367,9 +367,9 @@
 		$("#dateoftcissued").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateoftcissued" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftcissued").datepicker("option", "showAnim",
@@ -381,9 +381,9 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -579,8 +579,10 @@
 
 	function CalculateAge(value) {
 		var test = document.getElementById('datepicker').value;
+		var splitDate = dateOfBirth.split('-');
+		var dateOfBirthSplit = splitDate[1]+"-"+splitDate[0]+"-"+splitDate[2]
 		var today = new Date();
-		var birthDate = new Date(test);
+		var birthDate = new Date(dateOfBirthSplit);
 		var age = today.getFullYear() - birthDate.getFullYear();
 		var m = today.getMonth() - birthDate.getMonth();
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
